@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Task from './Task';
 
 export default class Overview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
+      tasks: [{ name: 'jorge' }, { name: 'alexa' }],
     };
   }
 
@@ -14,12 +15,22 @@ export default class Overview extends Component {
     }));
   }
 
-  showTasks() {}
+  showTasks() {
+    console.log('hi');
+    this.state.tasks.forEach((task) => {
+      return <li>{task.name}</li>;
+    });
+  }
 
   render() {
     return (
       <div className="task-container">
-        <ul></ul>
+        <h2>Tasks!</h2>
+        <ul className="tasks">
+          {this.state.tasks.map((task) => {
+            return <Task name={task.name} />;
+          })}
+        </ul>
       </div>
     );
   }
