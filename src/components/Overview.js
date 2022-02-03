@@ -1,37 +1,13 @@
-import React, { Component } from 'react';
-import Task from './Task';
+import React from 'react';
 
-export default class Overview extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: [{ name: 'jorge' }, { name: 'alexa' }],
-    };
-  }
+export default function Overview(props) {
+  const { tasks } = props;
 
-  addTask() {
-    this.setState((state, props) => ({
-      tasks: state.tasks.push(props.task),
-    }));
-  }
-
-  showTasks() {
-    console.log('hi');
-    this.state.tasks.forEach((task) => {
-      return <li>{task.name}</li>;
+  function showTasks() {
+    return tasks.map((task) => {
+      return <li key={task.id}>{task.name}</li>;
     });
   }
 
-  render() {
-    return (
-      <div className="task-container">
-        <h2>Tasks!</h2>
-        <ul className="tasks">
-          {this.state.tasks.map((task) => {
-            return <Task name={task.name} />;
-          })}
-        </ul>
-      </div>
-    );
-  }
+  return <ul className="task-container">{showTasks()}</ul>;
 }
